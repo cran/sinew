@@ -41,7 +41,7 @@
 #' @export
 #' @examples 
 #' makeOxygen(stats::lm,add_default = TRUE,add_fields = c('export','examples'))
-makeOxygen=function(obj,add_default=TRUE, add_fields=NULL,use_dictionary=NULL, print=TRUE, ...){
+makeOxygen=function(obj,add_default=TRUE, add_fields=c("details","examples","seealso","rdname","export"),use_dictionary=NULL, print=TRUE, ...){
   
   header_add=c(
     author            ="AUTHOR [AUTHOR_2]",
@@ -51,7 +51,7 @@ makeOxygen=function(obj,add_default=TRUE, add_fields=NULL,use_dictionary=NULL, p
     details           ="DETAILS",
     #evalRd           ="",
     example           ="path_to_file/relative/to/packge/root",
-    examples          ="\n#' EXAMPLE1 \n#'",
+    examples          ="\n#' \\dontrun{\n#' if(interactive()){\n#'  #EXAMPLE1\n#'  }\n#' }",
     export            ="",
     #exportClass      ="",
     #exportMethod     ="",
@@ -114,12 +114,15 @@ makeOxygen=function(obj,add_default=TRUE, add_fields=NULL,use_dictionary=NULL, p
     if(import=='list()') import=''
     
     cutOFF=ifelse('cut'%in%names(importList),importList$cut,3)
+    if(import=='') add_fields=add_fields[!grepl('seealso',add_fields)]
     if('seealso'%in%add_fields) header_add=c(header_add,seealso=paste0(makeSeeAlso(obj,cutOFF=cutOFF),collapse='\n'))
     
     param_desc=NULL
     if(!is.null(use_dictionary)) param_desc=ls_param(obj=obj,dictionary = use_dictionary,print = FALSE)
     fn=as.list(formals(obj))
-    
+  
+    if('rdname'%in%add_fields) header_add['rdname']=lbl
+      
       out=sapply(names(fn),function(name_y){
         cl=class(fn[[name_y]])
         out=as.character(fn[[name_y]])
