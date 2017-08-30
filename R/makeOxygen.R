@@ -2,7 +2,7 @@
 #' @description Creates roxygen2 skeleton including title, description, import and other fields
 #' @param obj function or name of function
 #' @param add_default boolean to add defaults values to the end of the PARAM fields, Default: TRUE
-#' @param add_fields character vector to add additional roxygen2 fields, Default: NULL
+#' @param add_fields character vector to add additional roxygen2 fields, Default: c("details","examples","seealso","rdname","export")
 #' @param use_dictionary character, path_to_dictionary, Default: NULL
 #' @param print boolean print output to console, Default: TRUE
 #' @param ... arguments to be passed to makeImport
@@ -40,46 +40,11 @@
 #'}
 #' @export
 #' @examples 
-#' makeOxygen(stats::lm,add_default = TRUE,add_fields = c('export','examples'))
-makeOxygen=function(obj,add_default=TRUE, add_fields=c("details","examples","seealso","rdname","export"),use_dictionary=NULL, print=TRUE, ...){
+#' makeOxygen(stats::lm)
+makeOxygen=function(obj,add_default=TRUE, add_fields=sinew_opts$get('add_fields'),use_dictionary=NULL, print=TRUE, ...){
   
-  header_add=c(
-    author            ="AUTHOR [AUTHOR_2]",
-    backref           ="src/filename.cpp",
-    concept           ="CONCEPT_TERM_1 [CONCEPT_TERM_2]",
-    describeIn        ="FUNCTION_NAME DESCRIPTION",
-    details           ="DETAILS",
-    #evalRd           ="",
-    example           ="path_to_file/relative/to/packge/root",
-    examples          ="\n#' \\dontrun{\n#' if(interactive()){\n#'  #EXAMPLE1\n#'  }\n#' }",
-    export            ="",
-    #exportClass      ="",
-    #exportMethod     ="",
-    family            ="FAMILY_TITLE",
-    field             ="FIELD_IN_S4_RefClass DESCRIPTION",
-    format            ="DATA_STRUCTURE",
-    importClassesFrom ="PKG CLASS_a [CLASS_b]",
-    importMethodsFrom ="PKG METHOD_a [METHOD_b]",
-    include           ="FILENAME.R [FILENAME_b.R]",
-    inherit           ="[PKG::]SOURCE_FUNCTION [FIELD_a FIELD_b]",
-    inheritDotParams  ="[PKG::]SOURCE_FUNCTION",
-    inheritSection    ="[PKG::]SOURCE_FUNCTION [SECTION_a SECTION_b]",
-    keywords          ="KEYWORD_TERM",
-    name              ="NAME",
-    #note             ="",
-    #noRd             ="",
-    #rawRd            ="",
-    #rawNamespace     ="",
-    rdname            ="FUNCTION_NAME",
-    references        ="BIB_CITATION",
-    section           ="SECTION_NAME",
-    source            ="\\url{http://somewhere.important.com/}",
-    slot              ="SLOTNAME DESCRIPTION",
-    template          ="FILENAME",
-    templateVar       ="NAME VALUE",
-    useDynLib         ="PKG [ROUTINE_a ROUTINE_b]"
-  )
-
+  header_add<-sinew_opts$get()
+  
   lbl=deparse(substitute(obj))
   lbl=gsub('"','',lbl)
   
@@ -113,7 +78,7 @@ makeOxygen=function(obj,add_default=TRUE, add_fields=c("details","examples","see
     import=do.call('makeImport',importList)
     if(import=='list()') import=''
     
-    cutOFF=ifelse('cut'%in%names(importList),importList$cut,3)
+    cutOFF=switch('cut'%in%names(importList),importList$cut,3)
     if(import=='') add_fields=add_fields[!grepl('seealso',add_fields)]
     if('seealso'%in%add_fields) header_add=c(header_add,seealso=paste0(makeSeeAlso(obj,cutOFF=cutOFF),collapse='\n'))
     
