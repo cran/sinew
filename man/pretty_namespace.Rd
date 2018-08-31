@@ -4,13 +4,18 @@
 \alias{pretty_namespace}
 \title{Append namespace to functions in script}
 \usage{
-pretty_namespace(con = NULL, text = NULL, overwrite = FALSE,
-  sos = FALSE)
+pretty_namespace(con = NULL, text = NULL, force = NULL, ignore = NULL,
+  overwrite = FALSE, sos = FALSE)
 }
 \arguments{
 \item{con}{character, path to file or directory that contains script, Default: NULL}
 
 \item{text}{character, vector that contains script, Default: NULL}
+
+\item{force}{list, named list of functions to force over the
+internal search (seee details), Default: NULL}
+
+\item{ignore}{list, named list of functions to ignore (seee details), Default: NULL}
 
 \item{overwrite}{boolean, overwrite original file, Default: FALSE}
 
@@ -23,7 +28,14 @@ character
 Autoappend namespace to functions in script by searchpath order
 }
 \details{
-searches for functions in the loadedNamespace, help.search and then \code{\link[sos]{findFn}}
+Searches for functions in the loadedNamespace, help.search and then \code{\link[sos]{findFn}}.
+If force is not NULL but a named list eg list(stats=c('rnorm','runif'),utils = 'head'),
+then the value pairs will be used in place of what was found using the search path.
+If ignore is not NULL but a named list eg list(stats=c('rnorm','runif'),utils = 'head'),
+then if the functions are found they will not have a namespace attached to them.
+
+If you want to toggle off the summary console printing you can set it globally via 
+sinew_opts$set(pretty_print=FALSE).
 }
 \examples{
 txt <- '#some comment

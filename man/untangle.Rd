@@ -4,16 +4,17 @@
 \alias{untangle}
 \title{Split an R script by functions}
 \usage{
-untangle(text = NULL, file = "", dir.out = NULL, keep.body = TRUE)
+untangle(file = "", text = NULL, dir.out = NULL, keep.body = TRUE)
 }
 \arguments{
-\item{text}{character, vector of R commands, Default: NULL}
-
 \item{file}{character, path to R file, Default: ''}
+
+\item{text}{character, vector of R commands, Default: NULL}
 
 \item{dir.out}{character, path to save new R files, Default: NULL}
 
-\item{keep.body}{boolean, if TRUE all non-funcitons will be saved to body.R, Default: TRUE}
+\item{keep.body}{boolean, if TRUE all non-funcitons will be saved to body.R in the parent 
+directory of dir.out, Default: TRUE}
 }
 \value{
 list of seperate functions
@@ -22,7 +23,8 @@ list of seperate functions
 Split a R script with multiple functions into multiple single function R files.
 }
 \details{
-body.R is written to the working directory and not dir.out .
+body.R is written to the working directory and not dir.out. Functions that
+ are objects in lists are treated as objects and will stay in body.R .
 }
 \examples{
 \dontrun{
