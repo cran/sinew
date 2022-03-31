@@ -1,12 +1,67 @@
-pretty_parse <- function(txt){
+#' @title parse_check
+#' @description check for fail of pretty_parse > parse, and offers to open file to offending line
+#' @keywords Internal
+#' @param p result of `pretty_parse` > `parse`
+#' @param txt input text to `pretty_parse` 
+#' @inheritParams pretty_namespace
+#' @importFrom rstudioapi navigateToFile
+#' @importFrom utils askYesNo
+ 
+parse_check <- function(p, txt, ask) {
+  if (inherits(p, "try-error")) {
+    if (!ask) stop(p) 
+    .sf <- sys.frames()
+    .sc <- sys.calls()
+    # get the top level sinew call
+    top_call <- min(which(grepl("^(?:sinew\\:\\:)?pretty", lapply(.sc, `[[`, 1))))
+    if (!any(top_call)) stop(p)
+    # get the object names in that environment
+    .vars <- ls(envir = .sf[min(top_call)][[1]])
+    # get the object name for the connection/input file
+    .var <- grepl("(?:^con$)|(?:^input$)" , .vars, perl = TRUE)
+    if (!any(.var)) stop(p) # fail if no suitable con/input found (text was input)
+    # get the connection/input filename
+    .path <- get0(.vars[.var], envir = .sf[top_call][[1]], mode = "character")
+    if (interactive() && !is.null(.path)) {
+      if (!file.exists(.path)) stop(p)
+      # get the row & column
+      .rc <- as.numeric(strsplit(attr(p, "condition")$message, "\\:")[[1]][2:3])
+      # get the line number corresponding to the first line of text & add the rows indicated by the error (may not always be accurate but should work)
+      .line <- grep(txt[1], readLines(.path), fixed = TRUE) + .rc[1]
+      # Ask if the user wants to go to this line
+      .answer <- utils::askYesNo(paste0("Parse failed at line(s) ", paste0(.line, collapse = ", "),". Open the file in RStudio?"))
+      # if yes, go!
+      if (isTRUE(.answer)) {
+        rstudioapi::navigateToFile(.path, min(.line), .rc[2])
+      }
+    }
   
-  p <- parse(text = txt)
+    
+    stop(p)
+  } else {
+    return(p)
+  }
+}
+
+pretty_parse <- function(txt, ask){
   
+  p <- try(parse(text = txt,keep.source = TRUE), silent = TRUE)
+  p <- parse_check(p, txt, ask)
   p1 <- utils::getParseData(p)
   
   rmParent <- p1$parent[p1$token == "SYMBOL_PACKAGE"]
   
-  p1[p1$token == "SYMBOL_FUNCTION_CALL" & !p1$parent %in% rmParent, ]
+  ret <- p1[p1$token %in% c("SYMBOL_FUNCTION_CALL") & !p1$parent %in% rmParent, ]
+  
+  if(length(ret)>0){
+    #clean out list functions
+    clean_idx <- sapply(sprintf('\\$%s',ret$text),function(p) !any(grepl(pattern = p,x=txt)))
+    if(length(clean_idx)>0){
+      ret <- ret[clean_idx,]
+    }
+  }
+  
+  ret
   
 }
 
@@ -20,7 +75,7 @@ pretty_shift <- function(txt, sym.funs, nm, overwrite, force, ignore){
     sym.funs$new_text <- crayon::red(sym.funs$new_text)
   }
   
-  idx <- which(!sym.funs$namespace %in% c("base", NA))
+  idx <- which(!sym.funs$namespace %in% c('base','datasets', NA))
   
   sym.funs.i <- split(sym.funs[idx,],sym.funs$line1[idx])
   
@@ -60,11 +115,13 @@ pretty_shift <- function(txt, sym.funs, nm, overwrite, force, ignore){
   } else {
     
     pretty_print(sym.funs,file = nm)
-    writeLines(crayon::white(txt))
+    
+    if(sinew_opts$get('pretty_print'))
+      writeLines(crayon::white(txt))
     
   }
   
-  txt
+  sym.funs
 }
 
 pretty_manip <- function(sym.funs, force, ignore){
@@ -72,29 +129,47 @@ pretty_manip <- function(sym.funs, force, ignore){
   sym.funs$action <- ''
   
   if(!is.null(force)){
-    sym.funs <- pretty_merge(sym.funs,force,'replace')
+    sym.funs <- pretty_merge(sym.funs, force)
   }
   
   if(!is.null(ignore)){
-    sym.funs <- pretty_merge(sym.funs,ignore,'remove')
+    sym.funs <- pretty_merge(sym.funs, ignore)
   }
   
-  sym.funs$new_text <- sprintf('%s::%s',sym.funs$namespace, sym.funs$text)  
+    sym.funs$new_text <- sprintf('%s%s',ifelse(nzchar(sym.funs$namespace), paste0(sym.funs$namespace,"::"), ''), sym.funs$text)
   
   sym.funs
 }
 
-#' @importFrom cli symbol
-pretty_merge <- function(e1,e2,action = 'relpace'){
+ 
 
+#' @title pretty_merge
+#' @description handles `force` and `ignore` arguments
+#' @param e1 \code{(data.frame)} typically `sym.funs` with list of all parsed functions in `txt`
+#' @param e2 \code{(list)} typically `force` or `ignore` with list of namespaces and the respective functions to force or ignore
+#' @importFrom cli symbol
+
+pretty_merge <- function(e1, e2){
+
+  e2 <- sapply(names(e2),function(x){
+    if(is.null(e2[[x]])){
+      ls(envir = asNamespace(x))
+    }else{
+      e2[[x]]
+    }
+  },
+  simplify = FALSE)
+  
   e1 <- merge(e1,enframe_list(e2),by = 'text',all.x = TRUE)
   
+  action <- deparse(match.call()$e2)
+  
   e1 <- switch(action,
-         'replace'={
+         'force'={
            e1$namespace[!is.na(e1$force_ns)] <- e1$force_ns[!is.na(e1$force_ns)]
            e1
          },
-         'remove'={
+         'ignore'={
            e1[is.na(e1$force_ns),]
          })
 
@@ -103,16 +178,18 @@ pretty_merge <- function(e1,e2,action = 'relpace'){
   e1$force_ns <- NULL
   
   e1[order(e1$id),]
+  
 }
 
 #' @importFrom sos findFn
-#' @importFrom utils help.search
-pretty_find <- function(NMPATH, sos, sym.funs, funs){
+#' @importFrom utils help.search menu
+#' @importFrom crayon red col_substr
+pretty_find <- function(NMPATH, sos, sym.funs, funs, txt, ask, askenv){
   
   check_global <- ls(envir = get(search()[1]))
   
   if (length(check_global)>0){
-    global.funs <- check_global[sapply(check_global, function(x) class(get(x)) == "function")]
+    global.funs <- check_global[sapply(check_global, function(x) inherits(get(x),what="function"))]
     funs <- funs[!funs %in% global.funs]  
   }
   
@@ -130,8 +207,73 @@ pretty_find <- function(NMPATH, sos, sym.funs, funs){
     for (fun in funs) {
       suppressWarnings(fun.help <- utils::help.search(sprintf("^%s$", fun), ignore.case = FALSE))
       if (nrow(fun.help$matches) > 0) {
-        sym.funs$namespace[sym.funs$text %in% fun] <- fun.help$matches$Package[1]
-        funs <- funs[-match(fun, funs)]
+        
+        if(length(fun.help$matches$Package)>1&ask){
+          
+          choices <- sprintf('%s::%s',fun.help$matches$Package,fun)
+          
+          persistent_choices <- ls(envir = askenv)
+          
+          intersect_choices <- intersect(persistent_choices,choices)
+          
+          
+          
+          if(length(intersect_choices) > 0){
+            
+            choice <- intersect_choices
+            
+          } else if (paste0("Ignore::", fun) %in% persistent_choices) {
+            choice <- ''
+          } else {
+            choice <- "Print Context"
+            while (choice == "Print Context") {
+              menu_choices <- unique(c(sprintf('%s(*)', choices), choices, "Print Context", "Ignore Instance", "Ignore All(*)"))
+              
+              menu_title <- sprintf('Select which namespace to use for "%s"\n(*) if you want it to persist for all subsequent instances',fun)
+              
+              choice_idx <- utils::menu(choices = menu_choices,title=menu_title)
+              loc <- gregexpr(paste0(fun,"("), txt, fixed = TRUE)
+              context <- mapply(function(.x, .y) {
+                if (!any(.y > 0)) return(.x)
+                .subs <- data.frame(
+                bs = .y,
+                es = .y + attr(.y, "match.length")
+                )
+                .env <- environment()
+                apply(.subs, 1, function(.l){
+                  .string_end <- nchar(.x)
+                  assign(".x", paste0(crayon::col_substr(.x, 0, .l["bs"] - 1), crayon::red(crayon::col_substr(.x, .l["bs"], .l["es"] - 2)), crayon::col_substr(.x, .l["es"] - 1, .string_end)), .env)
+                })
+                .env$.x
+              }, txt, loc)
+              
+              
+              
+              choice <- menu_choices[choice_idx]
+              if (choice == "Print Context") cat(context, sep = "\n")
+            }
+              
+              if(grepl('\\(*\\)$',choice)){
+                clean_choice <- gsub('\\(\\*\\)$','',choice)
+                if (grepl("^Ignore\\sAll", choice)) {
+                  clean_choice <- paste0("Ignore::",fun)
+                }
+                assign(clean_choice,TRUE,askenv)
+              }
+              
+          }
+          if (grepl("^Ignore\\s", choice)) choice <- ''
+          pkg_choice <- gsub(':(.*?)$','',choice)  
+          
+        }else{
+          
+          pkg_choice <- fun.help$matches$Package[1]
+          
+        }
+        
+        sym.funs$namespace[sym.funs$text %in% fun] <- pkg_choice
+        
+        funs <- funs[-which(funs%in%fun)]
       }
     }
   }
@@ -145,6 +287,7 @@ pretty_find <- function(NMPATH, sos, sym.funs, funs){
       }
     }
   }
+
   
   sym.funs
   
@@ -156,7 +299,7 @@ enframe_list <- function(x){
 
 #' @importFrom crayon red strip_style
 #' @importFrom cli symbol
-pretty_print <- function(obj,file){
+pretty_print <- function(obj,file,chunk=NULL){
   
   if(!sinew_opts$get('pretty_print'))
     return(NULL)
@@ -164,11 +307,18 @@ pretty_print <- function(obj,file){
   if(nrow(obj)==0)
     return(NULL)
   
-  if(!grepl('\\.[rR]$',file))
+  if(!grepl('\\.r$|\\.rmd$',tolower(file)))
     file <- 'text object'
+
+  if(!is.null(chunk)){
+    file <- sprintf('%s (%s)',file,chunk)
+  }
   
-  obj <- obj[!obj$namespace %in% c("base"),]
-    
+  obj <- obj[!obj$namespace %in% c("base","datasets"),]
+  
+  if(nrow(obj)==0)
+    return(NULL)
+   
   obj$new_text <- crayon::strip_style(obj$new_text)
   
   obj$symbol <- ifelse(is.na(obj$namespac),crayon::red(cli::symbol$cross),cli::symbol$tick)
@@ -194,7 +344,7 @@ pretty_print <- function(obj,file){
     
   cat(
     sprintf("\nfunctions changed in '%s':\n\n%s: found, %s: not found, (): instances, %s: user intervention\n\n%s\n\n",
-            file,
+            if (grepl("\\_tmp\\_", file)) strsplit(basename(file), "_tmp_")[[1]][1] else file,
             cli::symbol$tick,
             crayon::red(cli::symbol$cross),
             cli::symbol$checkbox_on,
@@ -220,22 +370,42 @@ mf <- function(x, pat) {
   ns <- try(
     {
       
-      if(!isNamespaceLoaded(x)){
+      if((!isNamespaceLoaded(x))|(!x%in%basename(searchpaths()))){
         y <- attachNamespace(x)  
       }
       
       ls(
-        envir = sprintf('pacakge:%s',x),
+        name = sprintf('package:%s',x),
         pattern = sprintf("^(%s)$", paste0(pat, collapse = "|"))
         )
     },
     silent = TRUE
   )
   
-  if (class(ns) == "try-error") {
+  if (inherits(ns,"try-error")) {
     ns <- vector("character")
   }
   
   ns
 }
 
+validate_force <- function(x){
+  vec <- unlist(x)
+  ret <- vec[duplicated(vec) | duplicated(vec, fromLast=TRUE)]
+  
+  if(length(ret)>0){
+    ret_df <- enframe_list(x)
+    ret_df <- ret_df[ret_df$text%in%unique(ret),]
+    ret_list <- split(ret_df$force_ns,ret_df$text)
+    ret_chr <- sapply(names(ret_list),function(nm){
+      sprintf('%s: %s',nm,paste(ret_list[[nm]],collapse = ', '))
+    },simplify = TRUE)
+    msg <- paste0(ret_chr,collapse = '\n')
+stop(
+sprintf('Conflicting namespace assignment in force argument\n%s',msg)
+)
+  }else{
+    TRUE
+  }
+
+}

@@ -5,7 +5,11 @@
 \alias{sinew_opts}
 \alias{sinew_opts_current}
 \title{Default and current sinew options}
-\format{An object of class \code{list} of length 5.}
+\format{
+An object of class \code{list} of length 5.
+
+An object of class \code{list} of length 5.
+}
 \usage{
 sinew_opts
 
@@ -25,17 +29,16 @@ use these options. Note the global options set in one chunk will not affect
 the options in this chunk itself, and that is why we often need to set global
 options in a separate chunk.
 
-Below is a list of default chunk options, retrieved via
-\code{sinew_opts$get()}:
-
-\Sexpr[results=verbatim]{str(sinew::sinew_opts$get())}
+A list of default chunk options, can be retrieved via
+\code{sinew_opts$get()}
 }
 \note{
 \code{sinew_opts_current} is read-only in the sense that it does nothing if
-  you call \code{sinew_opts_current$set()}; you can only query the options via
-  \code{sinew_opts_current$get()}.
+you call \code{sinew_opts_current$set()}; you can only query the options via
+\code{sinew_opts_current$get()}.
 }
 \examples{
-sinew_opts$get('add_fields')
+sinew_opts$get()
 }
+\concept{opts}
 \keyword{datasets}

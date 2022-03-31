@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Motivation</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Motivation</h1>
+
+
+
+<p>How can <code>sinew</code> help you?</p>
+<p><code>sinew</code> automates tasks that are part of <code>R</code> package documentation and maintance in order to help developers consistently create robust <a href="https://CRAN.R-project.org/package=roxygen2/vignettes/roxygen2.html">roxygen2</a> documentation and pass <code>R CMD check --as-cran</code>.</p>
+<div id="quick-turnaraound" class="section level2">
+<h2>Quick Turnaraound</h2>
+<p>Two common scenarios arise in package development</p>
+<ul>
+<li>You start a new project and open a file to develop your idea. Many functions later at the end of the day you look up and you have created a mess of a file.</li>
+</ul>
+<p><img src="data:image/jpeg;base64,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" width="353" /></p>
+<ul>
+<li>You recieve a mammoth 10,000 line uncommented file to decipher for QC - good luck.</li>
+</ul>
+<p><iframe src="data:text/html,%0A%3C%21DOCTYPE%20html%3E%0A%3Chtml%3E%0A%0A%3Chead%3E%0A%20%20%20%20%3Cmeta%20charset%3D%22utf%2D8%22%20%2F%3E%0A%20%20%20%20%3Ctitle%3EAnimated%20GIF%20%2D%20Find%20%26amp%3B%20Share%20on%20GIPHY%3C%2Ftitle%3E%0A%20%20%20%20%3Cmeta%20name%3D%22description%22%20content%3D%22Discover%20%26amp%3B%20share%20this%20Animated%20GIF%20with%20everyone%20you%20know%2E%20GIPHY%20is%20how%20you%20search%2C%20share%2C%20discover%2C%20and%20create%20GIFs%2E%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22author%22%20content%3D%22GIPHY%22%20%2F%3E%0A%20%20%20%20%3Cmeta%20name%3D%22keywords%22%20content%3D%22Animated%20GIFs%2C%20GIFs%2C%20Giphy%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22alexaVerifyID%22%20content%3D%22HMyPJIK%2DpLEheM5ACWFf6xvnA2U%22%20%2F%3E%0A%20%20%20%20%3Cmeta%20name%3D%22viewport%22%20content%3D%22width%3Ddevice%2Dwidth%2C%20initial%2Dscale%3D1%22%20%2F%3E%0A%20%20%20%20%3Cmeta%20name%3D%22robots%22%20content%3D%22noindex%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22og%3Aurl%22%20content%3D%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%26amp%3Brid%3Dgiphy%2Egif%26amp%3Bct%3Dg%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22og%3Atitle%22%20content%3D%22Animated%20GIF%20%2D%20Find%20%26amp%3B%20Share%20on%20GIPHY%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22og%3Adescription%22%20content%3D%22Discover%20%26amp%3B%20share%20this%20Animated%20GIF%20with%20everyone%20you%20know%2E%20GIPHY%20is%20how%20you%20search%2C%20share%2C%20discover%2C%20and%20create%20GIFs%2E%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22og%3Atype%22%20content%3D%22video%2Eother%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22og%3Aimage%22%20content%3D%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%26amp%3Brid%3D200%2Egif%26amp%3Bct%3Dg%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22og%3Asite%5Fname%22%20content%3D%22GIPHY%22%3E%0A%20%20%20%20%3Cmeta%20property%3D%22fb%3Aapp%5Fid%22%20content%3D%22406655189415060%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22twitter%3Acard%22%20value%3D%22player%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22twitter%3Atitle%22%20value%3D%22Animated%20GIF%20%2D%20Find%20%26amp%3B%20Share%20on%20GIPHY%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22twitter%3Adescription%22%20value%3D%22Discover%20%26amp%3B%20share%20this%20Animated%20GIF%20with%20everyone%20you%20know%2E%20GIPHY%20is%20how%20you%20search%2C%20share%2C%20discover%2C%20and%20create%20GIFs%2E%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22twitter%3Aimage%22%20value%3D%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%26amp%3Brid%3Dgiphy%5Fs%2Egif%26amp%3Bct%3Dg%22%3E%0A%20%20%20%20%3Cmeta%20name%3D%22twitter%3Asite%22%20value%3D%22%40giphy%22%3E%0A%20%20%20%20%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%20%20%20%20%20%20%20%20html%2C%0A%20%20%20%20%20%20%20%20body%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20height%3A%20100%25%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20body%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20margin%3A%200%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20padding%3A%200%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%2Eembed%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20background%3A%20no%2Drepeat%20url%28%27https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%26amp%3Brid%3D200w%5Fs%2Egif%26amp%3Bct%3Dg%27%29%20center%20center%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20background%2Dsize%3A%20contain%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20height%3A%20100%25%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%3C%2Fstyle%3E%0A%3C%2Fhead%3E%0A%0A%3Cbody%3E%0A%20%20%20%20%3Cdiv%20class%3D%22embed%22%3E%3C%2Fdiv%3E%0A%20%20%20%20%3C%21%2D%2D%20ga%20%2D%2D%3E%0A%3Cscript%20%3E%0A%20%20%20%20%28function%28i%2Cs%2Co%2Cg%2Cr%2Ca%2Cm%29%7Bi%5B%27GoogleAnalyticsObject%27%5D%3Dr%3Bi%5Br%5D%3Di%5Br%5D%7C%7Cfunction%28%29%7B%0A%20%20%20%20%28i%5Br%5D%2Eq%3Di%5Br%5D%2Eq%7C%7C%5B%5D%29%2Epush%28arguments%29%7D%2Ci%5Br%5D%2El%3D1%2Anew%20Date%28%29%3Ba%3Ds%2EcreateElement%28o%29%2C%0A%20%20%20%20m%3Ds%2EgetElementsByTagName%28o%29%5B0%5D%3Ba%2Easync%3D1%3Ba%2Esrc%3Dg%3Bm%2EparentNode%2EinsertBefore%28a%2Cm%29%0A%20%20%20%20%7D%29%28window%2Cdocument%2C%27script%27%2C%27%2F%2Fwww%2Egoogle%2Danalytics%2Ecom%2Fanalytics%2Ejs%27%2C%27ga%27%29%3B%0A%20%20%20%20ga%28%27create%27%2C%20%27UA%2D38174542%2D5%27%2C%20%7B%27cookieDomain%27%3A%20%27auto%27%2C%20%27cookieFlags%27%3A%20%27SameSite%3DNone%3B%20Secure%27%7D%29%3B%0A%20%20%20%20ga%28%27require%27%2C%20%27displayfeatures%27%29%3B%0A%20%20%20%20%0A%20%20%20%20ga%28%27send%27%2C%20%27pageview%27%29%3B%0A%3C%2Fscript%3E%0A%3C%21%2D%2D%20%2Fga%20%2D%2D%3E%0A%0A%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20%20%20window%2EGIPHY%5FFE%5FEMBED%5FKEY%20%3D%20%22eDs1NYmCVgdHvI1x0nitWd5ClhDWMpRE%22%3B%0A%20%20%20%20%20%20%20%20window%2EGIPHY%5FAPI%5FURL%20%3D%20%22https%3A%2F%2Fapi%2Egiphy%2Ecom%2Fv1%2F%22%3B%0A%20%20%20%20%20%20%20%20window%2EGIPHY%5FPINGBACK%5FURL%20%3D%20%22https%3A%2F%2Fpingback%2Egiphy%2Ecom%22%3B%0A%20%20%20%20%3C%2Fscript%3E%0A%20%20%20%20%3Cscript%20src%3D%22%2Fstatic%2Fdist%2Fruntime%2Eef4f58ac%2Ebundle%2Ejs%22%3E%3C%2Fscript%3E%0A%20%20%20%20%3Cscript%20src%3D%22%2Fstatic%2Fdist%2FgifEmbed%2E27bd78f8%2Ebundle%2Ejs%22%3E%3C%2Fscript%3E%0A%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20%20%20var%20Giphy%20%3D%20Giphy%20%7C%7C%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20if%20%28Giphy%2ErenderGifEmbed%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20Giphy%2ErenderGifEmbed%28document%2EquerySelector%28%27%2Eembed%27%29%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20gif%3A%20%7B%22id%22%3A%20%22em438MSCPulkbd7Zvv%22%2C%20%22title%22%3A%20%22Animated%20GIF%22%2C%20%22images%22%3A%20%7B%22looping%22%3A%20%7B%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Dloop%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Dloop%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%2015465996%7D%2C%20%22downsized%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Ddownsized%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Ddownsized%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20245%2C%20%22height%22%3A%20230%2C%20%22size%22%3A%201747873%7D%2C%20%22downsized%5Flarge%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20245%2C%20%22height%22%3A%20230%2C%20%22size%22%3A%202072025%7D%2C%20%22downsized%5Fmedium%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20245%2C%20%22height%22%3A%20230%2C%20%22size%22%3A%202072025%7D%2C%20%22downsized%5Fsmall%22%3A%20%7B%22width%22%3A%20148%2C%20%22height%22%3A%20140%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Ddownsized%2Dsmall%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Ddownsized%2Dsmall%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%20133209%7D%2C%20%22downsized%5Fstill%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Ddownsized%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Ddownsized%5Fs%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20245%2C%20%22height%22%3A%20230%2C%20%22size%22%3A%2042290%7D%2C%20%22fixed%5Fheight%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20213%2C%20%22height%22%3A%20200%2C%20%22size%22%3A%201645075%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%20514372%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20689996%7D%2C%20%22fixed%5Fheight%5Fdownsampled%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%5Fd%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200%5Fd%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20213%2C%20%22height%22%3A%20200%2C%20%22size%22%3A%20234209%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%5Fd%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200%5Fd%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20129866%7D%2C%20%22fixed%5Fheight%5Fsmall%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20107%2C%20%22height%22%3A%20100%2C%20%22size%22%3A%20382416%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%20115671%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20169110%7D%2C%20%22fixed%5Fheight%5Fsmall%5Fstill%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100%5Fs%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20107%2C%20%22height%22%3A%20100%2C%20%22size%22%3A%2010232%7D%2C%20%22fixed%5Fheight%5Fstill%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200%5Fs%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20213%2C%20%22height%22%3A%20200%2C%20%22size%22%3A%2038933%7D%2C%20%22fixed%5Fwidth%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200w%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20200%2C%20%22height%22%3A%20188%2C%20%22size%22%3A%201429846%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200w%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%20446656%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200w%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20602364%7D%2C%20%22fixed%5Fwidth%5Fdownsampled%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%5Fd%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200w%5Fd%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20200%2C%20%22height%22%3A%20188%2C%20%22size%22%3A%20204387%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%5Fd%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200w%5Fd%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20113802%7D%2C%20%22fixed%5Fwidth%5Fsmall%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100w%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100w%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20100%2C%20%22height%22%3A%2094%2C%20%22size%22%3A%20331878%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100w%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100w%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%2048323%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100w%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100w%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20144698%7D%2C%20%22fixed%5Fwidth%5Fsmall%5Fstill%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F100w%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D100w%5Fs%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20100%2C%20%22height%22%3A%2094%2C%20%22size%22%3A%208934%7D%2C%20%22fixed%5Fwidth%5Fstill%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2F200w%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3D200w%5Fs%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20200%2C%20%22height%22%3A%20188%2C%20%22size%22%3A%2033946%7D%2C%20%22original%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20245%2C%20%22height%22%3A%20230%2C%20%22size%22%3A%202072025%2C%20%22frames%22%3A%2043%2C%20%22hash%22%3A%20%220c5f404c2cfe38adbf0f78f31c4282c0%22%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%202776427%2C%20%22webp%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22webp%5Fsize%22%3A%20941888%7D%2C%20%22original%5Fmp4%22%3A%20%7B%22width%22%3A%20480%2C%20%22height%22%3A%20450%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%202776427%7D%2C%20%22original%5Fstill%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%5Fs%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%5Fs%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%20245%2C%20%22height%22%3A%20230%2C%20%22size%22%3A%2050415%7D%2C%20%22preview%22%3A%20%7B%22width%22%3A%20148%2C%20%22height%22%3A%20140%2C%20%22mp4%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Dpreview%2Emp4%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Dpreview%2Emp4%5Cu0026ct%3Dg%22%2C%20%22mp4%5Fsize%22%3A%2047232%7D%2C%20%22preview%5Fgif%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Dpreview%2Egif%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Dpreview%2Egif%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%2067%2C%20%22height%22%3A%2063%2C%20%22size%22%3A%2047853%7D%2C%20%22preview%5Fwebp%22%3A%20%7B%22url%22%3A%20%22https%3A%2F%2Fmedia3%2Egiphy%2Ecom%2Fmedia%2Fem438MSCPulkbd7Zvv%2Fgiphy%2Dpreview%2Ewebp%3Fcid%3Ddda24d501b6b8652bd3338fee5ac13d076226f73511ba70b%5Cu0026rid%3Dgiphy%2Dpreview%2Ewebp%5Cu0026ct%3Dg%22%2C%20%22width%22%3A%2068%2C%20%22height%22%3A%2064%2C%20%22size%22%3A%2021514%7D%7D%2C%20%22is%5Fvideo%22%3A%20false%2C%20%22tags%22%3A%20%5B%5D%2C%20%22cta%22%3A%20%7B%22text%22%3A%20%22%22%2C%20%22link%22%3A%20%22%22%7D%2C%20%22featured%5Ftags%22%3A%20%5B%5D%2C%20%22embed%5Furl%22%3A%20%22https%3A%2F%2Fgiphy%2Ecom%2Fembed%2Fem438MSCPulkbd7Zvv%22%2C%20%22relative%5Furl%22%3A%20%22%2Fgifs%2Fem438MSCPulkbd7Zvv%22%2C%20%22type%22%3A%20%22gif%22%2C%20%22index%5Fid%22%3A%20null%2C%20%22slug%22%3A%20%22em438MSCPulkbd7Zvv%22%2C%20%22url%22%3A%20%22https%3A%2F%2Fgiphy%2Ecom%2Fgifs%2Fem438MSCPulkbd7Zvv%22%2C%20%22short%5Furl%22%3A%20null%2C%20%22bitly%5Furl%22%3A%20null%2C%20%22username%22%3A%20%22yonicd%22%2C%20%22rating%22%3A%20%22%22%2C%20%22source%5Fimage%5Furl%22%3A%20null%2C%20%22source%5Fpost%5Furl%22%3A%20%22%22%2C%20%22source%5Fcontent%5Furl%22%3A%20null%2C%20%22source%5Ftld%22%3A%20%22%22%2C%20%22source%5Fdomain%22%3A%20null%2C%20%22source%5Fcaption%22%3A%20null%2C%20%22source%5Fbody%22%3A%20null%2C%20%22has%5Fattribution%22%3A%20false%2C%20%22is%5Fhidden%22%3A%20null%2C%20%22is%5Fremoved%22%3A%20null%2C%20%22is%5Fcommunity%22%3A%20null%2C%20%22is%5Fanonymous%22%3A%20null%2C%20%22is%5Ffeatured%22%3A%20null%2C%20%22is%5Frealtime%22%3A%20null%2C%20%22is%5Findexable%22%3A%20null%2C%20%22is%5Fsticker%22%3A%20false%2C%20%22is%5Fpreserve%5Fsize%22%3A%20null%2C%20%22is%5Ftrending%22%3A%20false%2C%20%22gps%5Fno%5Ftrend%22%3A%20false%2C%20%22create%5Fdatetime%22%3A%20null%2C%20%22update%5Fdatetime%22%3A%20null%2C%20%22trending%5Fdatetime%22%3A%20null%2C%20%22external%5Fmedia%22%3A%20null%2C%20%22import%5Ftype%22%3A%20null%2C%20%22user%22%3A%20%7B%22id%22%3A%202406009%2C%20%22username%22%3A%20%22yonicd%22%2C%20%22avatar%5Furl%22%3A%20%22https%3A%2F%2Fmedia%2Egiphy%2Ecom%2Favatars%2Fyonicd%2FQTBJOrq0GgxN%2Epng%22%2C%20%22display%5Fname%22%3A%20%22%22%2C%20%22user%5Ftype%22%3A%20%22user%22%2C%20%22twitter%22%3A%20%22%40yoniceedee%22%2C%20%22is%5Fpublic%22%3A%20true%2C%20%22is%5Fverified%22%3A%20false%2C%20%22is%5Ffreelance%22%3A%20false%2C%20%22is%5Fcommunity%22%3A%20false%2C%20%22suppress%5Fchrome%22%3A%20false%2C%20%22website%5Furl%22%3A%20null%2C%20%22twitter%5Furl%22%3A%20%22https%3A%2F%2Ftwitter%2Ecom%2Fyoniceedee%22%2C%20%22facebook%5Furl%22%3A%20null%2C%20%22instagram%5Furl%22%3A%20null%2C%20%22tumblr%5Furl%22%3A%20null%2C%20%22tiktok%5Furl%22%3A%20null%2C%20%22youtube%5Furl%22%3A%20null%2C%20%22attribution%5Fdisplay%5Fname%22%3A%20%22yonicd%22%2C%20%22disable%5Ffreelance%5Fpopup%22%3A%20false%2C%20%22name%22%3A%20%22yonicd%22%2C%20%22about%5Fbio%22%3A%20%22%22%2C%20%22description%22%3A%20%22%22%2C%20%22profile%5Furl%22%3A%20%22%2Fchannel%2Fyonicd%22%2C%20%22profile%5Fpath%22%3A%20%22%2Fchannel%2Fyonicd%22%2C%20%22website%5Fdisplay%5Furl%22%3A%20null%7D%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20autoPlay%3A%20%22%22%2C%0A%20%20%20%20%20%20%20%20hideVideo%3A%20false%2C%0A%20%20%20%20%20%20%20%20isTwitter%3A%20false%2C%0A%20%20%20%20%20%20%20%20trackingQueryString%3A%20%27utm%5Fsource%3Diframe%26utm%5Fmedium%3Dembed%26utm%5Fcampaign%3DEmbeds%26utm%5Fterm%3D%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%3C%2Fscript%3E%0A%3C%2Fbody%3E%0A%0A%3C%2Fhtml%3E%0A" width="300" height="280" frameBorder="1" class="giphy-embed" allowFullScreen></iframe></p>
+<p><code>sinew</code> can help turn the around that headache into a <code>CRAN</code> ready package in a few short steps</p>
+<ol style="list-style-type: decimal">
+<li>Create a package project in <code>RStudio</code>.</li>
+<li>Place the file in the <code>data-raw</code> folder.</li>
+<li>Run <code>sinew::untangle</code> on the large script with the destination directory <code>pkg/R</code>. This will separate the core functions in the body into single function files (named as the function) and keep the body in <code>body.R</code></li>
+<li>Run <code>sinew::pretty_namespace</code> to append namespaces in the function scripts.</li>
+<li>Run <code>sinew::makeOxyFile</code> to populate the Roxygen2 skeleton.</li>
+<li>Run <code>sinew::make_import</code> to populate the <code>Imports</code> field of the <code>DESCRIPTION</code> file.</li>
+</ol>
+<p>This should get you far enough to make the impossible problem of understanding what is in that file to a manageable task, with the added benefit of producing a new package ready for distribution.</p>
+</div>
+<div id="reproducible-example" class="section level2">
+<h2>Reproducible Example</h2>
+<p>Lets use a reproducible example - The goal is to convert raw script into a package.</p>
+<p>The script includes two functions <code>yy</code> and <code>zz</code> and some general script that uses them</p>
+<p>To start we create a package with <a href="https://github.com/r-lib/usethis">usethis</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sinew)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pkg_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(),<span class="st">&#39;pkg&#39;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="at">path =</span> pkg_dir, <span class="at">open =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Creating &#39;/var/folders/kx/t4h_mm1910sb7vhm_gnfnx2c0000gn/T/Rtmp79mfWP/pkg/&#39;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Setting active project to &#39;/private/var/folders/kx/t4h_mm1910sb7vhm_gnfnx2c0000gn/T/Rtmp79mfWP/pkg&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Creating &#39;R/&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Writing &#39;DESCRIPTION&#39;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Package: pkg</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Title: What the Package Does (One Line, Title Case)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Version: 0.0.0.9000</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Authors@R (parsed):</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     * First Last &lt;first.last@example.com&gt; [aut, cre] (YOUR-ORCID-ID)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Description: What the package does (one paragraph).</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     license</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Encoding: UTF-8</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Roxygen: list(markdown = TRUE)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RoxygenNote: 7.1.2</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Writing &#39;NAMESPACE&#39;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(pkg_dir, usethis<span class="sc">::</span><span class="fu">use_data_raw</span>(<span class="at">open =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Creating &#39;data-raw/&#39;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Adding &#39;^data-raw$&#39; to &#39;.Rbuildignore&#39;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Writing &#39;data-raw/DATASET.R&#39;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Finish the data preparation script in &#39;data-raw/DATASET.R&#39;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Use `usethis::use_data()` to add prepared data to package</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(pkg_dir, usethis<span class="sc">::</span><span class="fu">use_mit_license</span>(<span class="at">copyright_holder =</span> <span class="st">&quot;John Doe&quot;</span>))</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Setting License field in DESCRIPTION to &#39;MIT + file LICENSE&#39;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Writing &#39;LICENSE&#39;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Writing &#39;LICENSE.md&#39;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓ Adding &#39;^LICENSE\\.md$&#39; to &#39;.Rbuildignore&#39;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(pkg_dir, usethis<span class="sc">::</span><span class="fu">use_roxygen_md</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(pkg_dir,fs<span class="sc">::</span><span class="fu">dir_tree</span>())</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── DESCRIPTION</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── LICENSE</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── LICENSE.md</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── NAMESPACE</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── R</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── data-raw</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     └── DATASET.R</span></span></code></pre></div>
+<p>Lets create a temporary file that will contain the script.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>example_file <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&#39;.R&#39;</span>,<span class="at">tmpdir =</span> <span class="fu">file.path</span>(pkg_dir, <span class="st">&#39;data-raw&#39;</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>example_lines <span class="ot">&lt;-</span> <span class="st">&quot;#some comment</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">yy &lt;- function(a=4){</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">  head(runif(10),a)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">  # a comment</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">zz &lt;- function(v=10,a=8){</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">  head(runif(v),a)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">yy(6)</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="st">zz(30,3)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(example_lines,<span class="at">file =</span> example_file)</span></code></pre></div>
+</div>
+<div id="untangling-files" class="section level2">
+<h2>Untangling Files</h2>
+<p>One of the first tasks for new developers is to move from long scripts that are intertwined with functions and body code into single function files in a R subdirectory and a clean body script that is easier to read.</p>
+<p>This task is probably a non-starter if you have more than a few hundered lines of code. This is where <code>sinew::untangle</code> can save you time. <code>sinew::untangle</code> will separate the long script into single function files in a subdirectory and keep the body script intact.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pkg_dir_R <span class="ot">&lt;-</span> <span class="fu">file.path</span>(pkg_dir,<span class="st">&#39;R&#39;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sinew<span class="sc">::</span><span class="fu">untangle</span>(<span class="at">file =</span> example_file,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">dir.out =</span> pkg_dir_R, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">dir.body =</span> <span class="fu">file.path</span>(pkg_dir, <span class="st">&#39;data-raw&#39;</span>))</span></code></pre></div>
+<p>As we can see we got three new files.</p>
+<ul>
+<li><code>body.R</code> in the data-raw directory</li>
+<li><code>yy.R</code> in the R subdirectory</li>
+<li><code>zz.R</code> in the <code>R</code> subdirectory</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(pkg_dir,fs<span class="sc">::</span><span class="fu">dir_tree</span>())</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── DESCRIPTION</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── LICENSE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── LICENSE.md</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── NAMESPACE</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── R</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── yy.R</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── zz.R</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── data-raw</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ├── DATASET.R</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ├── body.R</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     └── file96225394b61.R</span></span></code></pre></div>
+<details closed>
+<summary>
+<span title="Click to Expand"> Click to see body.R </span>
+</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">yy</span>(<span class="dv">6</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">zz</span>(<span class="dv">30</span>,<span class="dv">3</span>)</span></code></pre></div>
+</details>
+<p><br></p>
+<details closed>
+<summary>
+<span title="Click to Expand"> Click to see yy.R </span>
+</summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#some comment</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>yy <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">a=</span><span class="dv">4</span>){</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="fu">runif</span>(<span class="dv">10</span>),a)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a comment</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<p><br></p>
+<details closed>
+<summary>
+<span title="Click to Expand"> Click to see zz.R </span>
+</summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>zz <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">v=</span><span class="dv">10</span>,<span class="at">a=</span><span class="dv">8</span>){</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="fu">runif</span>(v),a)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="namespacing" class="section level2">
+<h2>Namespacing</h2>
+<p>It has become common practice to use the namespace in function calls, and it is obligatory in order to pass a cran check. But, not everyone does it and if you’re not use to it, it’s a pain to go back and update your script.</p>
+<p>This is where <code>sinew::pretty_namespace</code> comes in. This function will go through your script and attach namespaces for you, with the same logic as the search path.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sinew<span class="sc">::</span><span class="fu">pretty_namespace</span>(pkg_dir_R,<span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; functions changed in &#39;/var/folders/kx/t4h_mm1910sb7vhm_gnfnx2c0000gn/T//Rtmp79mfWP/pkg/R/yy.R&#39;:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓: found, x: not found, (): instances, ☒: user intervention</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ✓ utils::head  (1) </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ✓ stats::runif (1) </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; functions changed in &#39;/var/folders/kx/t4h_mm1910sb7vhm_gnfnx2c0000gn/T//Rtmp79mfWP/pkg/R/zz.R&#39;:</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✓: found, x: not found, (): instances, ☒: user intervention</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ✓ utils::head  (1) </span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ✓ stats::runif (1)</span></span></code></pre></div>
+<p>So now we have separate files with functions appropriatly associated with namespaces, and now we can add <a href="https://CRAN.R-project.org/package=roxygen2/vignettes/roxygen2.html">roxygen2</a> headers.</p>
+</div>
+<div id="documentation" class="section level2">
+<h2>Documentation</h2>
+<p>Now we are ready to create the function documentation using <a href="https://CRAN.R-project.org/package=roxygen2/vignettes/roxygen2.html">roxygen2</a>. We use <code>sinew::makeOxygen</code> to create a skeleton for <a href="https://CRAN.R-project.org/package=roxygen2/vignettes/roxygen2.html">roxygen2</a> documentation. This function returns a skeleton that includes title, description, return, import and other fields populated with information scraped from the function script. We can also run <code>sinew::makeOxygen</code> in batch mode using <code>sinew::makeOxyfile</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sinew<span class="sc">::</span>sinew_opts<span class="sc">$</span><span class="fu">set</span>(<span class="at">markdown_links =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sinew<span class="sc">::</span><span class="fu">makeOxyFile</span>(<span class="at">input =</span> pkg_dir_R, <span class="at">overwrite =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @param a PARAM_DESCRIPTION, Default: 4</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @details DETAILS</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @examples </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; \dontrun{</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; if(interactive()){</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  #EXAMPLE1</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  }</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; }</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @seealso </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  [head][utils::head]</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  [runif][stats::runif]</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @rdname yy</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @export </span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @importFrom utils head</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @importFrom stats runif</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @param v PARAM_DESCRIPTION, Default: 10</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @param a PARAM_DESCRIPTION, Default: 8</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @details DETAILS</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @examples </span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; \dontrun{</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; if(interactive()){</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  #EXAMPLE1</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  }</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; }</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @seealso </span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  [head][utils::head]</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  [runif][stats::runif]</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @rdname zz</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @export </span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @importFrom utils head</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @importFrom stats runif</span></span></code></pre></div>
+<details closed>
+<summary>
+<span title="Click to Expand"> Click to see yy.R </span>
+</summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#some comment</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param a PARAM_DESCRIPTION, Default: 4</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @details DETAILS</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples </span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; \dontrun{</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; if(interactive()){</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  #EXAMPLE1</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  }</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; }</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @seealso </span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  [head][utils::head]</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  [runif][stats::runif]</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @rdname yy</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export </span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom utils head</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom stats runif</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>yy <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">a=</span><span class="dv">4</span>){</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  utils<span class="sc">::</span><span class="fu">head</span>(stats<span class="sc">::</span><span class="fu">runif</span>(<span class="dv">10</span>),a)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a comment</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<p><br></p>
+<details closed>
+<summary>
+<span title="Click to Expand"> Click to see zz.R </span>
+</summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param v PARAM_DESCRIPTION, Default: 10</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param a PARAM_DESCRIPTION, Default: 8</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @details DETAILS</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; \dontrun{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; if(interactive()){</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  #EXAMPLE1</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  }</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; }</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @seealso </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  [head][utils::head]</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  [runif][stats::runif]</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @rdname zz</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export </span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom utils head</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom stats runif</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>zz <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">v=</span><span class="dv">10</span>,<span class="at">a=</span><span class="dv">8</span>){</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  utils<span class="sc">::</span><span class="fu">head</span>(stats<span class="sc">::</span><span class="fu">runif</span>(v),a)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<p><br></p>
+<p>The premise of <code>sinew::makeOxygen</code> is to expand on the default skeleton in <code>RStudio</code>, so basic fields are in the output by default. Each field is given with a relevant placeholder giving a hint what is expected. The following is the meat add to these bones:</p>
+<ul>
+<li>param default values:
+<ul>
+<li>If a default value is set for a function parameter it will be added to the end <code>@param</code> line.</li>
+</ul></li>
+<li>import/importFrom
+<ul>
+<li>The package scrapes the script with make_import looking for declared namespaces to create the proper calls for <code>@import</code> and <code>@importFrom</code> which are placed at the bottom of the output.</li>
+</ul></li>
+<li>seealso
+<ul>
+<li>linking to other packages is also taken care of when adding the field <code>@seealso</code>. Any functions that are included in <code>@importFrom</code> will have a link to them by default.</li>
+</ul></li>
+</ul>
+</div>
+<div id="description-file" class="section level2">
+<h2>DESCRIPTION FILE</h2>
+<p>It is also important to update the package <code>DESCRIPTION</code> file <code>Imports</code> field. This can be done for you with <code>sinew::make_import</code>, by either creating a new <code>Imports</code> field or updating an existing one.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sinew<span class="sc">::</span><span class="fu">make_import</span>(pkg_dir_R,<span class="at">format =</span> <span class="st">&#39;description&#39;</span>,<span class="at">desc_loc =</span> pkg_dir)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Imports:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stats,</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  utils</span></span></code></pre></div>
+</div>
+<div id="update-documentation" class="section level2">
+<h2>Update documentation</h2>
+<p>An important part of maintaining a package is keeping the documentation updated. Using <code>sinew::moga</code> we can achieve this painlessly. <code>sinew::moga</code> runs the same underlying script as <code>sinew::makeOxygen</code> but appends new information found into the current <a href="https://CRAN.R-project.org/package=roxygen2/vignettes/roxygen2.html">roxygen2</a> header instead of creating a new one.</p>
+<p>Lets say we updated <code>yy.R</code> to include another param and used another function from the <code>stats</code> package. So the <a href="https://CRAN.R-project.org/package=roxygen2/vignettes/roxygen2.html">roxygen2</a> header is now out of synch with the current script.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>new_yy <span class="ot">&lt;-</span> <span class="st">&quot;#some comment</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @param a numeric, set the head to trim from random unif Default: 4</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @details DETAILS</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @examples </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; </span><span class="sc">\\</span><span class="st">dontrun{</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; if(interactive()){</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39;  #EXAMPLE1</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39;  }</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; }</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @seealso </span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39;  </span><span class="sc">\\</span><span class="st">code{</span><span class="sc">\\</span><span class="st">link[utils]{head}}</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39;  </span><span class="sc">\\</span><span class="st">code{</span><span class="sc">\\</span><span class="st">link[stats]{runif}}</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @rdname yy</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @export </span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @author Jonathan Sidi</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @importFrom utils head</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="st">#&#39; @importFrom stats runif</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="st">yy &lt;- function(a=4,b=2){</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="st">  x &lt;- utils::head(stats::runif(10*b),a)</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="st">  stats::quantile(x,probs=.95)</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="st">  # a comment</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="st">}&quot;</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(new_yy, <span class="at">file =</span> <span class="fu">file.path</span>(pkg_dir_R,<span class="st">&#39;yy.R&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">moga</span>(<span class="fu">file.path</span>(pkg_dir_R,<span class="st">&#39;yy.R&#39;</span>),<span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @param a numeric, set the head to trim from random unif Default: 4</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @param b PARAM_DESCRIPTION, Default: 2</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @details DETAILS</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @examples </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; \dontrun{</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; if(interactive()){</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  #EXAMPLE1</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  }</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; }</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @seealso </span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  \code{\link[utils]{head}}</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39;  \code{\link[stats]{runif}}</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @rdname yy</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @export </span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @author Jonathan Sidi</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @importFrom utils head</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #&#39; @importFrom stats runif</span></span></code></pre></div>
+<details closed>
+<summary>
+<span title="Click to Expand"> Click to see yy.R </span>
+</summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#some comment</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @title FUNCTION_TITLE</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @description FUNCTION_DESCRIPTION</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param a numeric, set the head to trim from random unif Default: 4</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param b PARAM_DESCRIPTION, Default: 2</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return OUTPUT_DESCRIPTION</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @details DETAILS</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; \dontrun{</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; if(interactive()){</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  #EXAMPLE1</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  }</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; }</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @seealso </span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  \code{\link[utils]{head}}</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;  \code{\link[stats]{runif}}</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @rdname yy</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export </span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @author Jonathan Sidi</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom utils head</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom stats runif</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>yy <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">a=</span><span class="dv">4</span>,<span class="at">b=</span><span class="dv">2</span>){</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> utils<span class="sc">::</span><span class="fu">head</span>(stats<span class="sc">::</span><span class="fu">runif</span>(<span class="dv">10</span><span class="sc">*</span>b),a)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">quantile</span>(x,<span class="at">probs=</span>.<span class="dv">95</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a comment</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="oxygenize-and-check" class="section level2">
+<h2>Oxygenize and Check</h2>
+<div id="oxygenize" class="section level3">
+<h3>Oxygenize</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>r_env_vars <span class="ot">&lt;-</span> <span class="cf">function</span> () {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">R_LIBS =</span> <span class="fu">paste</span>(<span class="fu">.libPaths</span>(), <span class="at">collapse =</span> .Platform<span class="sc">$</span>path.sep), </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">CYGWIN =</span> <span class="st">&quot;nodosfilewarning&quot;</span>, <span class="at">R_TESTS =</span> <span class="st">&quot;&quot;</span>, <span class="at">R_BROWSER =</span> <span class="st">&quot;false&quot;</span>, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">R_PDFVIEWER =</span> <span class="st">&quot;false&quot;</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.na</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;NOT_CRAN&quot;</span>, <span class="at">unset =</span> <span class="cn">NA</span>))) {</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        vars[[<span class="st">&quot;NOT_CRAN&quot;</span>]] <span class="ot">&lt;-</span> <span class="st">&quot;true&quot;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    vars</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_envvar</span>(<span class="fu">r_env_vars</span>(), roxygen2<span class="sc">::</span><span class="fu">roxygenise</span>(pkg_dir))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading pkg</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Writing NAMESPACE</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Writing NAMESPACE</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Writing yy.Rd</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Writing zz.Rd</span></span></code></pre></div>
+</div>
+<div id="r-cmd-check" class="section level3">
+<h3>R CMD Check</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>check_res <span class="ot">&lt;-</span> rcmdcheck<span class="sc">::</span><span class="fu">rcmdcheck</span>(<span class="at">path =</span> pkg_dir, <span class="at">args =</span> <span class="st">&#39;--as-cran&#39;</span>,<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="cleanup" class="section level3">
+<h3>Cleanup</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(pkg_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

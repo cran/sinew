@@ -4,13 +4,27 @@
 \alias{pretty_namespace}
 \title{Append namespace to functions in script}
 \usage{
-pretty_namespace(con = NULL, text = NULL, force = NULL, ignore = NULL,
-  overwrite = FALSE, sos = FALSE)
+pretty_namespace(
+  con = NULL,
+  text = NULL,
+  ask = TRUE,
+  askenv = new.env(),
+  force = NULL,
+  ignore = NULL,
+  overwrite = FALSE,
+  sos = FALSE
+)
 }
 \arguments{
 \item{con}{character, path to file or directory that contains script, Default: NULL}
 
 \item{text}{character, vector that contains script, Default: NULL}
+
+\item{ask}{boolean, If TRUE then a \code{\link[utils]{menu}} will be created for the use to
+choose between competing namespaces for a function, Default: TRUE}
+
+\item{askenv}{environment, environment that stores names of functions to force in ask,
+Default: new.env()}
 
 \item{force}{list, named list of functions to force over the
 internal search (seee details), Default: NULL}
@@ -28,14 +42,14 @@ character
 Autoappend namespace to functions in script by searchpath order
 }
 \details{
-Searches for functions in the loadedNamespace, help.search and then \code{\link[sos]{findFn}}.
-If force is not NULL but a named list eg list(stats=c('rnorm','runif'),utils = 'head'),
+Searches for functions in the \code{loadedNamespace}, \code{help.search} and then \code{\link[sos]{findFn}}.
+If force is not NULL but a named list eg \code{list(stats=c('rnorm','runif'),utils = 'head')},
 then the value pairs will be used in place of what was found using the search path.
-If ignore is not NULL but a named list eg list(stats=c('rnorm','runif'),utils = 'head'),
+If ignore is not NULL but a named list eg \code{list(stats=c('rnorm','runif'),utils = 'head')},
 then if the functions are found they will not have a namespace attached to them.
 
-If you want to toggle off the summary console printing you can set it globally via 
-sinew_opts$set(pretty_print=FALSE).
+If you want to toggle off the summary console printing you can set it globally via
+\code{sinew_opts$set(pretty_print=FALSE)}.
 }
 \examples{
 txt <- '#some comment
@@ -52,9 +66,9 @@ pretty_namespace(text=txt)
 
 }
 \seealso{
-\code{\link[sos]{findFn}}
- \code{\link[utils]{help.search}}
+\link[sos:findFn]{findFn}, \link[utils:help.search]{help.search}
 }
 \author{
 Jonathan Sidi
 }
+\concept{namespace}

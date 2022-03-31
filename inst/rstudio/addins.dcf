@@ -1,6 +1,16 @@
+Name: namespace
+Description: Attach namespace information to R or Rmd files
+Binding: pretty_addin
+Interactive: false
+
 Name: createOxygen
 Description: Create scaffolding for roxygen2 header
 Binding: oxygenAddin
+Interactive: false
+
+Name: createImport
+Description: Create import roxygen2 tag
+Binding: importAddin
 Interactive: false
 
 Name: interactiveOxygen
